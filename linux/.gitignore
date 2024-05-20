@@ -1,1 +1,11 @@
 flutter/ephemeral
+# Flutter/Dart/Pub related
+.dart_tool/
+.pub-cache/
+build/
+.packages
+.flutter-plugins
+.flutter-plugins-dependencies
+.flutter-versions
+.idea/
+.vscode/

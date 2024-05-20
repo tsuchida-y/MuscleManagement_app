@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'calendar_page.dart';
+import 'package:flutter_application_1/calendar_page.dart';
 
 void main() {
   runApp(const MyApp()); //constで宣言した変数は変えることができない
@@ -32,7 +32,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int counter = 0;
-
+  DateTime now = DateTime.now();
   void _incrementCounter() {
     setState(() {
       counter++;
@@ -61,10 +61,11 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       floatingActionButton: Stack(
+        //ボタンを複数使用するときに使う
         //複数の子ウィジェットを重ねて表示する
         children: <Widget>[
           Align(
-            alignment: const Alignment(0.1, 0.4),
+            alignment: const Alignment(0.1, 0.4), //ボタンの位置を座標で決める
             child: FloatingActionButton(
               onPressed: _incrementCounter,
               tooltip: 'Increment',

@@ -1,5 +1,3 @@
-//import 'dart:collection';
-
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
 
@@ -80,6 +78,19 @@ class _CalendarPageState extends State<CalendarPage> {
             ),
           ),
         ],
+      ),
+      floatingActionButtonLocation:
+          FloatingActionButtonLocation.startDocked, //floatingActionButtonを左に寄せる
+      floatingActionButton: Container(
+        margin: const EdgeInsets.only(bottom: 50.50), //余白を作成
+        child: FloatingActionButton.extended(
+          backgroundColor: const Color.fromARGB(255, 222, 181, 255),
+          onPressed: () {
+            Navigator.pop(context); //前の画面に戻る
+          },
+          label: const Text('戻る'),
+          icon: const Icon(Icons.arrow_back),
+        ),
       ),
     );
   }
