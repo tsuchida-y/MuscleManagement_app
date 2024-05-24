@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
             seedColor: Colors.deepPurple), //作成したパレットからいい感じにしてくれる
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Muscle training'),
+      home: const MyHomePage(title: 'MuscleManagement'),
     );
   }
 }
@@ -33,11 +33,11 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int counter = 0;
   DateTime now = DateTime.now();
-  void _incrementCounter() {
-    setState(() {
-      counter++;
-    });
-  }
+  // void _incrementCounter() {
+  //   setState(() {
+  //     counter++;
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -67,7 +67,15 @@ class _MyHomePageState extends State<MyHomePage> {
           Align(
             alignment: const Alignment(0.1, 0.4), //ボタンの位置を座標で決める
             child: FloatingActionButton(
-              onPressed: _incrementCounter,
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) =>
+                        CalendarPage(selectedDay: now), //現在の時間を渡す
+                  ),
+                );
+              },
               tooltip: 'Increment',
               child: const Icon(Icons.add),
             ),
@@ -84,7 +92,8 @@ class _MyHomePageState extends State<MyHomePage> {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => const CalendarPage()));
+                      builder: (context) => CalendarPage(selectedDay: now),
+                    ));
               },
               child: const Text('カレンダー'),
             ),
