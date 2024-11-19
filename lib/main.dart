@@ -4,10 +4,12 @@ import 'package:flutter_application_1/calendar_page.dart';
 void main() {
   runApp(const MyApp()); //constで宣言した変数は変えることができない
 }
-
+//StatelessWidget：再描画が必要でない時に使う
+//静的なテキスト、アイコン、画像など、変化しないUI要素に使われます。
+//buildメソッドは必須メソッド
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-  @override
+  const MyApp({super.key});//MyAppのコンストラクタ
+  @override//サブクラスでスーパークラスのメソッドと同じ名前、引数、戻り値を持つメソッドを再定義（オーバーライド）することができます
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter',
@@ -27,31 +29,30 @@ class MyHomePage extends StatefulWidget {
   final String title;
 
   @override
+  //Stateは状態が変わった場合に再描画
+  //StatefulWidget では、この createState() メソッドを使って対応する State クラスのインスタンスを作成し、ウィジェットに紐づける
+  //_をつけることでプライベートクラスになる
+  //=>はアロー関数（createState メソッドが _MyHomePageState インスタンスを返していることを表しています。）
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
   int counter = 0;
-  DateTime now = DateTime.now();
-  // void _incrementCounter() {
-  //   setState(() {
-  //     counter++;
-  //   });
-  // }
+  DateTime now = DateTime.now();//現在の日時を取得
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        backgroundColor: Theme.of(context).colorScheme.inversePrimary,//背景の設定
         title: Text(widget.title),
       ),
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,//真ん中に配置する
           children: <Widget>[
             const Text(
-              'あなたがボタンを押した回数:',
+              '　できた！',
             ),
             Text(
               '$counter',
