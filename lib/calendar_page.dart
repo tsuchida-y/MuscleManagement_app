@@ -4,7 +4,8 @@ import 'package:table_calendar/table_calendar.dart';
 class CalendarPage extends StatefulWidget {
   //CalendarPageクラスの作成し、StatefulWidgetクラスを継承した！
   final DateTime selectedDay; // 選択された日付を受け取るためのパラメータ
-  const CalendarPage({Key? key, required this.selectedDay})
+  final int counter; // カウンターの値を受け取るためのパラメータ
+  const CalendarPage({Key? key, required this.selectedDay, required this.counter})
       : super(key: key); //親クラスのコンストラクタを呼び出しつつ、必須パラメータであるselectedDayを初期化します
 
   @override
@@ -16,8 +17,7 @@ class CalendarPage extends StatefulWidget {
 
 
 
-class _CalendarPageState extends State<CalendarPage> {
-  //_CalendarPageStateクラスを作成し、State<CalendarPage>クラスを継承する。
+class _CalendarPageState extends State<CalendarPage> {//_CalendarPageStateクラスを作成し、State<CalendarPage>クラスを継承する。
   DateTime _focusedDay = DateTime.now(); //現在の日付と時刻を取得し、それを_focusedDayという変数に代入する
   CalendarFormat _calendarFormat =
       CalendarFormat.month; // 初期表示ではカレンダーウィジェットが月表示モードで表示される
@@ -27,13 +27,11 @@ class _CalendarPageState extends State<CalendarPage> {
   //Map形式(キーとデータをセットで保存)で保持　keyが日付　値が文字列
   //utc(協定世界時)
   final sampleMap = {
-    DateTime.utc(2024, 2, 20): ['一つ目のイベント', '二つ目のイベント'],//これでイベントを作成
-    DateTime.utc(2024, 2, 5): ['3つ目のイベント', '4つ目のイベント'],
+    DateTime.utc(2024, 11, 20): ['テスト'],//これでイベントを作成
   };
 
   final sampleEvents = {
-    DateTime.utc(2024, 2, 20): ['first', 'secondEvent'],
-    DateTime.utc(2024, 2, 5): ['thirdEvent', 'fourthEvent']
+    DateTime.utc(2024, 11, 10): ['test'],
   };
 
   @override
@@ -44,6 +42,19 @@ class _CalendarPageState extends State<CalendarPage> {
     _selectedDay = widget.selectedDay;
     _selectedEvents = sampleEvents[widget.selectedDay] ?? [];
     debugPrint("確認");
+
+        // counterが1の時に現在の日付にイベントを追加
+    if (widget.counter == 1) {
+      setState(() {
+        if (sampleMap.containsKey(widget.selectedDay)) {//選択された日付がキーとして存在するか
+          sampleMap[widget.selectedDay]!.add('筋トレ完了');//あるなら日付に対応するイベントリストに追加
+        } else {
+          sampleMap[widget.selectedDay] = ['筋トレ完了'];//ないなら新しいリストを作成し、そのリストに追加
+        }
+        _selectedEvents = sampleMap[widget.selectedDay]!;//sampleMapのwidget.selectedDayに対応するイベントリストを代入する。
+        //これで選択された日付のイベントが更新され、UIに反映される
+      });
+    }
   }
 
   @override

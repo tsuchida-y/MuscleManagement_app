@@ -47,17 +47,15 @@ class _MyHomePageState extends State<MyHomePage> {
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,//背景の設定
         title: Text(widget.title),
       ),
-      body: Center(
+      body: const Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,//真ん中に配置する
           children: <Widget>[
-            const Text(
-              '　できた！',
-            ),
-            Text(
-              '$counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
+            Text('　できた！',style: TextStyle(fontSize: 30)),
+            // Text(
+            //   '$counter',
+            //   style: Theme.of(context).textTheme.headlineMedium,
+            // ),
           ],
         ),
       ),
@@ -69,11 +67,14 @@ class _MyHomePageState extends State<MyHomePage> {
             alignment: const Alignment(0.1, 0.4), //ボタンの位置を座標で決める
             child: FloatingActionButton(
               onPressed: () {
+                setState(() {
+                  counter=1;//押した情報を格納する
+                });
                 Navigator.push(
                   context,
                   MaterialPageRoute(
                     builder: (context) =>
-                        CalendarPage(selectedDay: now), //現在の時間を渡す
+                        CalendarPage(selectedDay: now,counter: counter), //現在の時間とカウンターの値を渡す
                   ),
                 );
               },
@@ -90,10 +91,11 @@ class _MyHomePageState extends State<MyHomePage> {
                 side: const BorderSide(color: Colors.deepPurple),
               ),
               onPressed: () {
+                counter=0;
                 Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => CalendarPage(selectedDay: now),
+                    context,//現在のビルドコンテキストを指す
+                    MaterialPageRoute(//新しいページへのルートを定義する
+                      builder: (context) => CalendarPage(selectedDay: now,counter:counter),//新しいページとしてCalendarPageを作成し、引数として現在の日付を渡す
                     ));
               },
               child: const Text('カレンダー'),
